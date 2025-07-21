@@ -2,8 +2,10 @@
 // 2 : routes;
 // 3 : nested/seprated routes;
 // 4 : encryption module;
+const {log} = require("console");
+const http = require("http");
 
-class app{
+class express{
     constructor (){
         this.routes = [];
         this.middleWare = [];
@@ -23,5 +25,15 @@ class app{
     delete(path , callback){
         this.routes.push({method:"DELETE" , path , callback});
     }
+
+    //start server
+    listen(port , callback){
+        const server = http.createServer((req,res) => {
+            log(req.url);
+        });
+        server.listen(port , callback)
+    }
 }
+
+module.exports = express;
 
