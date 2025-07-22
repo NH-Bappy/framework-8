@@ -11,7 +11,11 @@ class express{
         this.middleWare = [];
     }
 
+// middleWare
 
+use(mwF){
+    this.middleWare.push(mwF)
+}
 
     get(path , callback) {
         this.routes.push({method:"GET" , path ,callback});
@@ -25,11 +29,31 @@ class express{
     delete(path , callback){
         this.routes.push({method:"DELETE" , path , callback});
     }
+//middleWare function execution
+
+middleWareFunEx(){
+
+}
+
 
     //start server
     listen(port , callback){
-        const server = http.createServer((req,res) => {
+        const server = http.createServer(async (req,res) => {
             log(req.url);
+            // execute middleWare function
+            this.middleWareFunEx(this.middleWare)
+
+
+
+
+
+
+
+            // match the routes
+        const isMatch = this.routes.find(item => item.method == req.method && item.path == req.url);
+        if(isMatch){
+            isMatch.callback(req , res)
+        }
         });
         server.listen(port , callback)
     }
