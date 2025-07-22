@@ -31,22 +31,30 @@ use(mwF){
     }
 //middleWare function execution
 
-middleWareFunEx(){
-
-}
+middleWareFunEx(req , res){
+ const dispatch =(item) => {
+    if(item >= this.middleWare.length){
+        return Promise.resolve();
+    }
+    return new Promise((resolve) => {
+        const singleMwF = this.middleWare[item];
+        singleMwF(req , res ,() => {
+            resolve(dispatch(item + 1));
+        });
+    });
+ };
+ return dispatch(0);
+};
 
 
     //start server
     listen(port , callback){
         const server = http.createServer(async (req,res) => {
-            log(req.url);
+
+            // log(req.url);
+
             // execute middleWare function
-            this.middleWareFunEx(this.middleWare)
-
-
-
-
-
+            await this.middleWareFunEx(req , res)
 
 
             // match the routes

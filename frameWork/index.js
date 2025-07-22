@@ -4,12 +4,14 @@ const port = 3000;
 
 
 
-app.use(() => {
+app.use((req , res , next) => {
     console.log("this is middleWare function 1")
+    next()
 })
 
-app.use(() => {
+app.use((req , res , next) => {
     console.log("this is middleWare function 2")
+    next()
 })
 
 app.get("/about" , (req , res)=>{
