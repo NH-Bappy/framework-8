@@ -4,7 +4,8 @@
   "main": "node.js",
   "scripts": {
     "start": "nodemon frameWork/app.js",
-    "dev": "nodemon frameWork/index.js"
+    "dev": "nodemon frameWork/index.js",
+    "en" : "node frameWork/encrypt.js"
   },
   "author": "",
   "license": "ISC",

@@ -1,4 +1,6 @@
 const express = require("./app");
+const brypt = require("./encrypt");
+const password = new brypt;
 const app = new express();
 const port = 3000;
 
@@ -15,7 +17,9 @@ app.use((req , res , next) => {
 })
 
 app.get("/about" , (req , res)=>{
-    res.end("where is the routes")
+    const hashPass = password.hashPassword("1234")
+    console.log(hashPass)
+    res.end("where is the routes" + hashPass)
 });
 app.get("/get" , ()=>{
     console.log("where is")
