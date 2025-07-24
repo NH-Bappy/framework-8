@@ -1,10 +1,8 @@
 const express = require("./app");
 const brypt = require("./encrypt");
-const password = new brypt;
 const app = new express();
+const password = new brypt;
 const port = 3000;
-
-
 
 app.use((req , res , next) => {
     console.log("this is middleWare function 1")
